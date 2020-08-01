@@ -1,0 +1,19 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+{% block header %}
+    <h2>登录到你的账户</h2>
+{% endblock header %}
+
+
+{% block content %}
+    {% if form.errors %}
+        {% bootstrap_alert "你的用户名或密码不正确，请重试" alert_type="warning" %}
+    {% endif %}
+
+    <form method="post" action="{% url 'users:login' %}">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button name="submit" class="btn btn-primary">登录</button>
+        <input type="hidden" name="next" value="{% url 'learning_logs:index' %}"/>
+    </form>
+{% endblock content %}
