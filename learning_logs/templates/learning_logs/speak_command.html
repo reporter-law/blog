@@ -1,0 +1,32 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+{% block header %}
+    <h2>语音交互界面:</h2>
+{% endblock header %}
+
+{% block content %}
+
+
+    <p>语音命令一：天气播报-命令格式必须携带"查询"</p>
+    <p>语音命令二：当前时间获知</p>
+    <p>语音命令三：csdn阅读量增加-"命令必须携带执行"</p>
+    <p>语音命令四：cnki文献简介爬取-"命令必须携带爬取"</p>
+    <p>语音命令五：百度搜索-"命令必须携带查询"</p>
+       <form method="post" action="{% url 'learning_logs:speak_command' %}">
+        {% csrf_token %}
+
+        {% buttons %}
+           <input type="hidden" name="语音交互开始" value=1><!--不能有逗号-->
+        <button type="submit" name="语音交互_" class="btn button-primany">开始语音交互</button>
+
+
+        {% endbuttons %}
+
+
+
+
+    </form>
+  <p>输出：{{text}}</p>
+
+
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+{% block header %}
+    <h2>{{ topic }}的内容</h2>
+{% endblock header %}
+{% block content %}
+    <input value="新建内容" type="button" onclick="location.href='{% url 'learning_logs:new_entry' topic.id %}'"
+           class="btn button-primary">
+    <br><br>
+    <!--{% bootstrap_alert "no" alert_type="warning" %}-->
+
+    {% for entry in entries %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h7>
+                    {{ entry.date_added|date:'M d, Y H:i' }}
+                    <small>
+                        <input value="编辑内容"
+                               type="button"
+                               onclick="location.href='{% url 'learning_logs:edit_entry' entry.id %}'"
+                               class="btn button-default btn-sm">
+                    </small>
+                </h7>
+            </div>
+            <div class="panel-body">
+                {{ entry.text|linebreaks }}
+            </div>
+        </div><!--panel-->
+    {% empty %}
+        还没有这个主题的内容
+    {% endfor %}
+    <input value="返回业务列表" type="button" onclick="location.href='{% url 'learning_logs:topics' %}'"
+           class="btn button-primary">
+
+
+{% endblock content %}

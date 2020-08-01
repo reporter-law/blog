@@ -1,0 +1,20 @@
+{% extends "learning_logs/base.html" %}
+{% block header %}
+    <h1>业务列表</h1>
+{% endblock header %}
+{% block content %}
+
+    <ul>
+        {% for topic in topics %}
+            <li>
+                <h3>
+                    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+                </h3>
+            </li>
+        {% empty %}
+            <li>还没有选择业务，你可以<a href="{% url 'learning_logs:new_topic' %}">新建业务</a></li>
+        {% endfor %}
+    </ul>
+    <input value="新建业务" type="button" onclick="location.href='{% url 'learning_logs:new_topic' %}'" class="btn button-primary btn-lg">
+
+{% endblock content %}
